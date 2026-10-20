@@ -10,11 +10,10 @@
 
 import { useState } from 'react';
 export default function BugMutatedState() {
-  let [count, setCount] = useState(0);
+  const [count, setCount] = useState(0);
 
   function handleAdd() {
-    count++;
-    setCount(count);
+    setCount(count + 1);
   }
 
   return (
@@ -26,4 +25,6 @@ export default function BugMutatedState() {
 }
 
 // Explanation:
-// (Write your explanation here)
+// count++ was mutating the state variable directly instead of going through
+// setCount. React doesn't pick up on direct mutations like that, so it
+// can lead to stale/wrong values. swapped it for setCount(count + 1).
